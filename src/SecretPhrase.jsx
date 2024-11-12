@@ -52,7 +52,7 @@ const SecretPhrase = () => {
         </div>
         {mnemonicWords.length == 0 && (
           <div className="text-blue-400">
-            Please Click on generate button to proceed :
+            Please Click on generate button & Scroll Down to get Wallet :
           </div>
         )}
         {mnemonicWords.length > 0 && (

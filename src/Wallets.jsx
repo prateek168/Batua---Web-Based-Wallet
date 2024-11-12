@@ -26,9 +26,9 @@ const WalletCard = ({
   };
 
   return (
-    <div className="border p-4 mb-4 w-80 bg-zinc-800 m-3 rounded-md shadow-md">
+    <div className="border p-2 mb-2 w-64 bg-zinc-800 m-1 rounded-md shadow-md">
       <div
-        className={`font-semibold text-center text-xl ${
+        className={`font-semibold text-center text-lg ${
           walletType === "ETH" ? "text-yellow-500" : "text-pink-900"
         }`}
       >
@@ -42,19 +42,19 @@ const WalletCard = ({
           }
         />
       </div>
-      <div className="mt-3">
-        <div className="border rounded-md bg-zinc-900 p-2 mb-2">
-          <p className="text-xl">Public Key:</p>
-          <div className="text-sm">{publicKey}</div>
+      <div className="mt-1">
+        <div className="border rounded-md bg-zinc-900 p-1 mb-1">
+          <p className="text-sm">Public Key:</p>
+          <div className="text-xs">{publicKey}</div>
         </div>
-        <div className="border p-2 rounded-md bg-zinc-900 mb-2">
-          <p className="text-xl">Private Key:</p>
-          <div className="text-sm">{privateKey}</div>
+        <div className="border p-1 rounded-md bg-zinc-900 mb-1">
+          <p className="text-sm">Private Key:</p>
+          <div className="text-xs">{privateKey}</div>
         </div>
       </div>
       <button
         onClick={onDelete}
-        className="bg-red-500 rounded-md text-white p-2 mt-2 w-full"
+        className="bg-red-500 rounded-md text-white p-1 mt-1 w-full"
       >
         Delete
       </button>
@@ -77,10 +77,6 @@ const Wallets = () => {
   }, []);
 
   const genSolwallet = () => {
-    if (!mnemonic) {
-      alert("GET MNEMONIC FIRST");
-      return;
-    }
     const seed = mnemonicToSeed(mnemonic);
     const path = `m/44'/501'/${currentIndex}'/0'`;
     const derivedSeed = derivePath(path, seed.toString("hex")).key;
@@ -107,10 +103,6 @@ const Wallets = () => {
   };
 
   const genEthWallet = async () => {
-    if (!mnemonic) {
-      alert("GET MNEMONIC FIRST");
-      return;
-    }
     const seed = await mnemonicToSeed(mnemonic);
     const derivationPath = `m/44'/60'/${currentIndex}'/0'`;
     const hdNode = HDNodeWallet.fromSeed(seed);
@@ -151,26 +143,26 @@ const Wallets = () => {
   };
 
   return (
-    <div className="min-h-screen p-10 text-3xl font-bold flex flex-col items-center bg-zinc-950 text-white">
-      <div className="flex flex-col items-center mb-5">
-        <div>Select Wallet To Generate</div>
-        <div className="flex space-x-4">
+    <div className="min-h-screen p-4 text-2xl font-bold flex flex-col items-center bg-zinc-950 text-white">
+      <div className="flex flex-col items-center mb-3">
+        <div className="text-lg">Select Wallet To Generate</div>
+        <div className="flex space-x-1">
           <button
             onClick={genSolwallet}
-            className="bg-pink-900 rounded-md px-3 py-1 text-xl h-9 w-40"
+            className="bg-pink-900 rounded-md px-3 py-1 text-lg h-8 w-28"
           >
             SOLANA
           </button>
           <button
             onClick={genEthWallet}
-            className="bg-yellow-500 rounded-md px-3 py-1 text-xl h-9 w-40"
+            className="bg-yellow-500 rounded-md px-3 py-1 text-lg h-8 w-28"
           >
             ETH
           </button>
         </div>
       </div>
 
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-center gap-2">
         {wallets.map((wallet, index) => (
           <WalletCard
             key={index}
